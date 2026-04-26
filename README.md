@@ -14,6 +14,16 @@ python -m pip install -r requirements.txt
 python -m uvicorn app:app --reload
 ```
 
+## Bootstrap admin user
+
+Create your first admin account for the Piccolo admin panel:
+
+```bash
+python create_superuser.py
+```
+
+If the username already exists, the script updates that user and ensures admin / superuser access is enabled.
+
 Open:
 
 - `http://localhost:8000/docs`
