@@ -1,4 +1,4 @@
-from piccolo.columns import Boolean, ForeignKey, Varchar
+from piccolo.columns import Boolean, ForeignKey, Varchar, Text, Integer, Float
 from piccolo.columns.readable import Readable
 from piccolo.table import Table
 from piccolo.apps.user.tables import BaseUser
