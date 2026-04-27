@@ -28,12 +28,6 @@ from auth_helpers import (
 from owned_piccolo_crud import OwnedPiccoloCRUD
 from tables import Category, Todo
 
-# HTMX server-rendered frontend (see htmx_routes.py + templates/htmx/)
-from htmx_routes import router as htmx_router
-# Plain Jinja2 server-rendered frontend (see app_routes.py + templates/app/)
-from app_routes import router as app_router
-
-
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     await initialize_schema_and_seed()
@@ -104,10 +98,6 @@ app.mount(
 )
 
 
-# Keep server-rendered routes available, but hide them from /docs and /redoc.
-app.include_router(htmx_router, include_in_schema=False)
-app.include_router(app_router, include_in_schema=False)
-# Serve static files (e.g. htmx.min.js) at /static
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
