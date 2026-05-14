@@ -15,7 +15,6 @@ from piccolo_api.fastapi.endpoints import FastAPIWrapper
 from piccolo_api.session_auth.tables import SessionsBase
 from starlette.status import HTTP_201_CREATED, HTTP_401_UNAUTHORIZED
 
-from app_startup import initialize_schema_and_seed
 from auth_helpers import (
     LoginRequest,
     RegisterRequest,
@@ -26,7 +25,8 @@ from auth_helpers import (
     user_payload,
 )
 from owned_piccolo_crud import OwnedPiccoloCRUD
-from tables import Category, Todo
+from tables import Category, Todo, initialize_schema_and_seed
+
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):

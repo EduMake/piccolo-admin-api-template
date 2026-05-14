@@ -3,4 +3,4 @@ import os
 
 os.makedirs("instance", exist_ok=True)
 
-DB = SQLiteEngine(path="instance/todo.sqlite")
+DB = SQLiteEngine(path="instance/piccolo.sqlite")
