@@ -218,7 +218,10 @@ async def admin_redirect() -> RedirectResponse:
 FastAPIWrapper(
     root_url="/api/categories/",
     fastapi_app=app,
-    piccolo_crud=PiccoloCRUD(table=Category, read_only=True),
+    piccolo_crud=PiccoloCRUD(
+        table=Category, 
+        read_only=True
+    ),
 )
 
 FastAPIWrapper(
@@ -226,7 +229,7 @@ FastAPIWrapper(
     fastapi_app=app,
     piccolo_crud=OwnedPiccoloCRUD(
         table=Todo,
-        owner_column=Todo.user,
         read_only=False,
+        owner_column=Todo.user,
     ),
 )

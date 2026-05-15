@@ -81,10 +81,11 @@ class Category(Table):
     name = Varchar(length=255, required=True, unique=True)
 
 class Todo(Table):
-    task = Text(required=True)
-    done = Boolean(default=False)
-    category = ForeignKey(references=Category, required=True)
+    task = Varchar(length=200, required=True)
     user = ForeignKey(references=BaseUser, null=False)
+    category = ForeignKey(references=Category, null=False, help_text="Select a category")
+    created = Timestamptz(default=TimestamptzNow())
+    done = Boolean(default=False)
 ```
 
 Change these to define the tables your application needs. Refer to [Piccolo column types](https://piccolo.readthedocs.io/en/latest/columns/index.html) for available field options.
@@ -129,7 +130,10 @@ If you need API endpoints for your tables, look for the template's default endpo
 FastAPIWrapper(
     root_url="/api/categories/",
     fastapi_app=app,
-    piccolo_crud=PiccoloCRUD(table=Category, read_only=True),
+    piccolo_crud=PiccoloCRUD(
+        table=Category, 
+        read_only=True
+    ),
 )
 
 FastAPIWrapper(
@@ -137,13 +141,13 @@ FastAPIWrapper(
     fastapi_app=app,
     piccolo_crud=OwnedPiccoloCRUD(
         table=Todo,
-        owner_column=Todo.user,
         read_only=False,
+        owner_column=Todo.user,
     ),
 )
 ```
 
-Replace with endpoints for your custom tables using `PiccoloCRUD` or custom routers as needed.
+Replace with endpoints for your custom tables using `PiccoloCRUD` (CRUD is an api that can do Create, Retrieve, Update & Delete or 'OwnedPiccoloCRUD' which imposes that a entity belongs to a user.
 
 ## Customizing admin setup
 

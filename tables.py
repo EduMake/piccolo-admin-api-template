@@ -1,5 +1,6 @@
 from piccolo.columns import Boolean, ForeignKey, Varchar, Text, Integer, Float, Timestamptz
 from piccolo.columns.readable import Readable
+from piccolo.columns.defaults.timestamptz import TimestamptzNow
 from piccolo.table import Table
 from piccolo.apps.user.tables import BaseUser
 from piccolo_api.session_auth.tables import SessionsBase
@@ -17,6 +18,7 @@ class Todo(Table):
     task = Varchar(length=200, required=True)
     user = ForeignKey(references=BaseUser, null=False)
     category = ForeignKey(references=Category, null=False, help_text="Select a category")
+    created = Timestamptz(default=TimestamptzNow())
     done = Boolean(default=False)
 
 async def initialize_schema_and_seed() -> None:
