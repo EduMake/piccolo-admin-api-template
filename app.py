@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from dotenv import load_dotenv
 from piccolo.apps.user.tables import BaseUser
 from piccolo_admin.endpoints import create_admin
 from piccolo_api.crud.endpoints import PiccoloCRUD
@@ -27,6 +28,7 @@ from auth_helpers import (
 from owned_piccolo_crud import OwnedPiccoloCRUD
 from tables import Category, Todo, initialize_schema_and_seed
 
+load_dotenv()
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
